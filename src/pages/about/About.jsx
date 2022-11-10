@@ -6,10 +6,7 @@ const About = () => {
     <>
       <Container align="center" wrap="wrap">
         <Header>Hello I'm Enes</Header>
-        <Info>
-          I'm Full-Stack Developer I build Web-Sites by coding with
-          javaScript/React/HTML/CSS/Bootstrap/
-        </Info>
+        <Info>I'm Full-Stack Developer</Info>
       </Container>
     </>
   );

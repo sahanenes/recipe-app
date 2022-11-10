@@ -9,6 +9,8 @@ export const Container = styled(Flex)`
   margin-top: 1rem;
   flex-direction: column;
   border-radius: 20px;
+
+  background: ${({ theme }) => theme.colors.mainColor};
 `;
 
 export const Header = styled(Flex)`
@@ -17,9 +19,12 @@ export const Header = styled(Flex)`
   margin-bottom: 2rem;
   border-radius: 10px;
   background-color: #e1f1de;
+  text-align: center;
 `;
 export const Info = styled.div`
-  width: 60%;
+  width: 80%;
   text-align: center;
   background-color: #e1f1de;
+  flex-wrap: wrap;
+  border-radius: 10px;
 `;
