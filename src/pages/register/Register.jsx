@@ -6,15 +6,24 @@ import { createUser } from "../../auth/firebase";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   console.log(email, password);
   const handleSubmit = (e) => {
-    createUser(email, password, navigate);
     e.preventDefault();
+    createUser(email, password, navigate, name);
   };
   return (
     <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter name"
+          onChange={(e) => setName(e.target.value)}
+        />
+      </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control

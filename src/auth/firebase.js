@@ -2,6 +2,8 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 
@@ -17,18 +19,38 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-export const createUser = async (email, password, navigate, displayName) => {
+export const createUser = async (email, password, navigate, name) => {
   try {
     let userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-
+    await updateProfile(auth.currentUser, { displayName: name });
     navigate("/");
 
     console.log(userCredential);
   } catch (error) {
     console.log(error.message);
   }
+};
+
+export const SignInuser = async (email, password, navigate) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    navigate("/");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+export const userObserver = (setCurrentUser) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const { email, displayName, photoURL } = user;
+      setCurrentUser({ email, displayName, photoURL });
+    } else {
+      setCurrentUser(false);
+      console.log("user signed out");
+    }
+  });
 };
